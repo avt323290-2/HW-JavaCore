@@ -1,3 +1,6 @@
+/**
+ * Уникальный компаратор для сравнения сотрудников по имени в обратном порядке.
+ */
 import java.util.Comparator;
 
 public class ReverseNameComparator implements Comparator<Employee> {

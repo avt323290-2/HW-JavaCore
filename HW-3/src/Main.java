@@ -1,4 +1,8 @@
+/**
+ * Главный класс, содержащий метод main для запуска программы.
+ */
 public class Main {
+
     public static void main(String[] args) {
         // Создаем объекты сотрудников и добавляем их в коллекцию
         Freelancer freelancer1 = new Freelancer("Иванов Сергей ", 15.0, 45000);

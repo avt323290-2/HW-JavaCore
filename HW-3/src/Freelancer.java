@@ -1,3 +1,6 @@
+/**
+ * Класс, представляющий работника с почасовой оплатой.
+ */
 public class Freelancer extends Employee {
     private double hourlyRate;
     private double hoursWorked;

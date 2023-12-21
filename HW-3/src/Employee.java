@@ -1,3 +1,6 @@
+/**
+ * Абстрактный класс, представляющий сущность работника.
+ */
 public abstract class Employee implements Comparable<Employee> {
     private String name;
 

@@ -2,6 +2,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Класс для хранения и управления коллекцией сотрудников.
+ */
 public class EmployeeCollection implements Iterable<Employee> {
     private List<Employee> employees = new ArrayList<>();
 

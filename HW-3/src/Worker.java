@@ -1,3 +1,6 @@
+/**
+ * Класс, представляющий работника с фиксированной оплатой.
+ */
 public class Worker extends Employee {
     private double fixedMonthlySalary;
 
