@@ -1,6 +1,9 @@
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+ * Программа для игры в крестики-нолики на поле размером 5x5.
+ */
 public class Program {
 
     private static final char DOT_HUMAN = 'X';
@@ -14,6 +17,11 @@ public class Program {
 
     private static final int WIN_COUNT = 4; // Выигрышная комбинация
 
+    /**
+     * Точка входа в программу.
+     *
+     * @param args Аргументы командной строки.
+     */
     public static void main(String[] args) {
         while (true) {
             initialize();
@@ -37,6 +45,9 @@ public class Program {
         }
     }
 
+    /**
+     * Инициализация объектов игры.
+     */
     static void initialize() {
         fieldSizeX = 5;
         fieldSizeY = 5;
@@ -50,6 +61,9 @@ public class Program {
         }
     }
 
+    /**
+     * Печать текущего состояния игрового поля.
+     */
     static void printField() {
         System.out.print("+");
         for (int i = 0; i < fieldSizeX; i++) {
@@ -71,6 +85,9 @@ public class Program {
         System.out.println();
     }
 
+    /**
+     * Ход игрока (человека).
+     */
     static void humanTurn() {
         int x;
         int y;
@@ -82,6 +99,9 @@ public class Program {
         field[x][y] = DOT_HUMAN;
     }
 
+    /**
+     * Ход игрока (компьютера).
+     */
     static void aiTurn() {
         // Попробовать выиграть следующим ходом
         if (!blockPlayerMove(DOT_AI)) {
@@ -96,14 +116,33 @@ public class Program {
         }
     }
 
+    /**
+     * Проверка, является ли ячейка игрового поля пустой.
+     *
+     * @param x координата x.
+     * @param y координата y.
+     * @return true, если ячейка пуста, иначе false.
+     */
     static boolean isCellEmpty(int x, int y) {
         return field[x][y] == DOT_EMPTY;
     }
 
+    /**
+     * Проверка валидности координат хода.
+     *
+     * @param x координата x.
+     * @param y координата y.
+     * @return true, если координаты валидны, иначе false.
+     */
     static boolean isCellValid(int x, int y) {
         return x >= 0 && x < fieldSizeX && y >= 0 && y < fieldSizeY;
     }
 
+    /**
+     * Проверка ничьи (все ячейки игрового поля заполнены).
+     *
+     * @return true, если ничья, иначе false.
+     */
     static boolean checkDraw() {
         for (int x = 0; x < fieldSizeX; x++) {
             for (int y = 0; y < fieldSizeY; y++) {
@@ -113,6 +152,12 @@ public class Program {
         return true;
     }
 
+    /**
+     * Проверка победы в игре.
+     *
+     * @param dot фишка игрока.
+     * @return true, если есть победитель, иначе false.
+     */
     static boolean checkWin(char dot) {
         for (int i = 0; i < fieldSizeX; i++) {
             for (int j = 0; j < fieldSizeY; j++) {
@@ -127,6 +172,34 @@ public class Program {
         return false;
     }
 
+    /**
+     * Проверка состояния игры (победа, ничья или продолжение игры).
+     *
+     * @param dot фишка игрока.
+     * @param s   победный слоган.
+     * @return true, если игра завершена, иначе false.
+     */
+    static boolean checkState(char dot, String s) {
+        if (checkWin(dot)) {
+            System.out.println(s);
+            return true;
+        } else if (checkDraw()) {
+            System.out.println("Ничья!");
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Проверка направления для выигрышной комбинации.
+     *
+     * @param x   координата x.
+     * @param y   координата y.
+     * @param dx  приращение по x.
+     * @param dy  приращение по y.
+     * @param dot фишка игрока.
+     * @return true, если есть выигрышная комбинация, иначе false.
+     */
     static boolean checkDirection(int x, int y, int dx, int dy, char dot) {
         int count = 0;
         for (int i = 0; i < WIN_COUNT; i++) {
@@ -140,6 +213,12 @@ public class Program {
         return count == WIN_COUNT;
     }
 
+    /**
+     * Блокировка хода игрока компьютером.
+     *
+     * @param dot фишка компьютера.
+     * @return true, если ход заблокирован, иначе false.
+     */
     static boolean blockPlayerMove(char dot) {
         for (int i = 0; i < fieldSizeX; i++) {
             for (int j = 0; j < fieldSizeY; j++) {
@@ -152,17 +231,6 @@ public class Program {
                     field[i][j] = DOT_EMPTY;
                 }
             }
-        }
-        return false;
-    }
-
-    static boolean checkState(char dot, String s) {
-        if (checkWin(dot)) {
-            System.out.println(s);
-            return true;
-        } else if (checkDraw()) {
-            System.out.println("Ничья!");
-            return true;
         }
         return false;
     }
